@@ -8,6 +8,13 @@
 import UIKit
 
 extension UIView {
+    /**
+     set auto-layout contstraints to views with format string
+     - Parameters:
+        - format: Format auto layout string.
+        - view: Views that need to format
+     - Returns: NA
+     */
     func addConstraintsWithFormat(format: String, view: UIView...) {
         var viewDict: [String: UIView] = [String: UIView]()
         for(index, view) in view.enumerated() {

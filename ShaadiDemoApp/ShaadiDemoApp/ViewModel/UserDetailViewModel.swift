@@ -26,6 +26,11 @@ class UserDetailViewModel {
         "\(userData.company.name)\n\(userData.company.catchPhrase)\n\(userData.company.bs)"
     }
 
+    /**
+     Update the favorite status of user and marked this method as discardableResult so that method will not complain about its return result
+     - Parameters:NA
+     - Returns: Message string according to user favorite status.
+     */
     @discardableResult
     func updateUserFavoriteStatus() -> String {
         self.isUserMarkedAsFavorite = !self.isUserMarkedAsFavorite

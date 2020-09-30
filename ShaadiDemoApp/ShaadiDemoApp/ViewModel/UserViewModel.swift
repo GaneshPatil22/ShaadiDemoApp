@@ -25,13 +25,20 @@
 import Foundation
 
 class UserViewModel {
-    
+
     weak var dataSource : GenericDataSource<UserDetailViewModel>?
-    
+
+    //MARK:- Dependency Injection DI
     init(dataSource : GenericDataSource<UserDetailViewModel>?) {
         self.dataSource = dataSource
     }
-    
+
+    /**
+     Make An API call to request all users
+     - Parameters:
+        - completion: Completion handler that takes error as a argument and returns void and default value will be nil
+     - Returns: NA
+     */
     func fetchAllUsers(completion: ((_ err: Error?) -> ())? = nil) {
         NetworkHelper<[UserDataModel]>.APICall(APIPath.FetchAllUsers.description) { [weak self] result in
             guard let strongSelf = self else { return }

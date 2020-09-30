@@ -18,7 +18,6 @@ class UserDataSource : GenericDataSource<UserDetailViewModel>, UITableViewDataSo
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.UserInfoTableViewCell.rawValue, for: indexPath) as! UserInfoTableViewCell
         let model = self.data.value[indexPath.row]
         cell.setUpData(viewModel: model)

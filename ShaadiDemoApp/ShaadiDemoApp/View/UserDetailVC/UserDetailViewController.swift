@@ -22,7 +22,8 @@ Street Number Street Name, Suite Number
 City Name, State Zip code*/
 
 class UserDetailViewController: UIViewController {
-    
+
+    //MARK:- All UI Elements
     let favoriteButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -32,7 +33,7 @@ class UserDetailViewController: UIViewController {
         btn.backgroundColor = .gray
         return btn
     }()
-    
+
     let favoriteDelegateButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -42,7 +43,7 @@ class UserDetailViewController: UIViewController {
         btn.backgroundColor = .gray
         return btn
     }()
-    
+
     let favoriteClouserButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -141,10 +142,12 @@ class UserDetailViewController: UIViewController {
         return lbl
     }()
 
+    //MARK:- Variables
     var userDetailViewModel: UserDetailViewModel
     var delegate: UpdateHomeViewControllerDelegate?
     var didTapOnFavoriteButton: (() -> ())?
-    
+
+    //MARK:- DI
     init(model: UserDetailViewModel) {
         self.userDetailViewModel = model
         super.init(nibName: nil, bundle: nil)
@@ -165,11 +168,15 @@ class UserDetailViewController: UIViewController {
         setUpData()
     }
 
+    /**
+     View Setup Method
+     - Parameters:NA
+     - Returns: NA
+     */
     private func setUpView() {
-
         //MARK:- Background
         view.backgroundColor = userDetailViewModel.isUserMarkedAsFavorite ? UIColor.yellow : UIColor.lightGray
-        
+
         //MARK:- Add UIElement to View
         self.view.addSubview(favoriteButton)
         self.view.addSubview(favoriteDelegateButton)
@@ -191,7 +198,6 @@ class UserDetailViewController: UIViewController {
         containerView.addSubview(companyDataLabel)
 
         //MARK:- Add Constraints
-
         view.addConstraintsWithFormat(format: "V:|-10-[v0]-10-[v1(30)]-10-[v2(30)]-10-|", view: containerView, favoriteDelegateButton, favoriteButton)
         view.addConstraintsWithFormat(format: "V:|-10-[v0]-10-[v1(30)]-10-[v2(30)]-10-|", view: containerView, favoriteClouserButton, favoriteButton)
         view.addConstraintsWithFormat(format: "H:|-10-[v0]-10-|", view: containerView)
@@ -225,22 +231,42 @@ class UserDetailViewController: UIViewController {
     //Details:- As our userViewModel is class and classes are reference type so updating favorite value here will also effect the value present on HomeViewController. So view will appear simply call reloadData.
     // See below i have also implemented the clouser as well as delegation to update the favorite value
 
+    /**
+     Simple method which will update the class object and tableview reload happen in view will appear
+     - Parameters:NA
+     - Returns: NA
+     */
     @objc private func favoriteBtnAction() {
         showMessageAndRedirectToPreviousVC()
     }
 
+    /**
+     Called delegate method which was used to reload the table view on home view.
+     - Parameters:NA
+     - Returns: NA
+     */
     //MARK:- Delegation method
     @objc private func favoriteDelegateBtnAction() {
         delegate?.updateSingleCellWhichHasBeenUpdate()
         showMessageAndRedirectToPreviousVC()
     }
 
+    /**
+     Called clouser which was used to reload the table view on home view.
+     - Parameters:NA
+     - Returns: NA
+     */
     //MARK:- Clouser
     @objc private func favoriteClouserBtnAction() {
         didTapOnFavoriteButton?()
         showMessageAndRedirectToPreviousVC()
     }
 
+    /**
+     Used to show the alert message and on OK tap it will redirect user to previous view controller.
+     - Parameters:NA
+     - Returns: NA
+     */
     private func showMessageAndRedirectToPreviousVC() {
         let message = userDetailViewModel.updateUserFavoriteStatus()
         AppUtil.showMessage(message, messageTitle: Messages.Success.rawValue, buttonTitle: Messages.Ok.rawValue) {

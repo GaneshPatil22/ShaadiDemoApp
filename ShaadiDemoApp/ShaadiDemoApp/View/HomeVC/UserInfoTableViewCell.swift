@@ -60,6 +60,11 @@ class UserInfoTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /**
+     Setup View
+     - Parameters:NA
+     - Returns: NA
+     */
     private func setUpView() {
 
         //MARK:- Added view to main View
@@ -105,6 +110,11 @@ class UserInfoTableViewCell: UITableViewCell {
 
     }
 
+    /**
+     Setup data on view
+     - Parameters:NA
+     - Returns: NA
+     */
     func setUpData(viewModel: UserDetailViewModel) {
         userNameLabel.text = viewModel.userData.name
         userPhoneNumberLabel.text = viewModel.userData.phone

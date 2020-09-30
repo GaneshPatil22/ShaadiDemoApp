@@ -22,7 +22,6 @@ class StarView: UIView {
 
     override func draw(_ rect: CGRect) {
         createStar()
-        
     }
 
     private func createStar() {
@@ -32,7 +31,7 @@ class StarView: UIView {
         let yCenter: CGFloat = center.y
         let w = self.frame.width
         let r = w / 2.0
-        let flip: CGFloat = -1.0 // use this to flip the figure 1.0 or -1.0
+        let flip: CGFloat = -1.0
         let polySide = CGFloat(5)
         let theta = 2.0 * Double.pi * Double(2.0 / polySide)
         path?.move(to: CGPoint(x: xCenter, y: r * flip + yCenter))
@@ -45,7 +44,7 @@ class StarView: UIView {
         shapeLayer.path = path?.cgPath
         layer.addSublayer(shapeLayer)
     }
-    
+
     func setColor(color: UIColor) {
         shapeLayer.fillColor = color.cgColor
     }
